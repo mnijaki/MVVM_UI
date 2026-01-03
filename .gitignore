@@ -2,6 +2,13 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
+
+# Claude AI project context and configuration
+CLAUDE.md
+claude.md
+.claude/
+*.claude.json
+
 .utmp/
 /[Ll]ibrary/
 /[Tt]emp/
