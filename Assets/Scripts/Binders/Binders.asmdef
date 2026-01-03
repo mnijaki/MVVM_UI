@@ -1,0 +1,19 @@
+{
+    "name": "Binders",
+    "rootNamespace": "Binders",
+    "references": [
+        "GUID:9b2dd2718134b46daa4793b4b976c5ba",
+        "GUID:355a510d7ecde4ea98dabeb1597cabb1",
+        "GUID:b7daca9f73cde4e02830da59c6205492",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
