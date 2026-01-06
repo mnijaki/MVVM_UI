@@ -23,21 +23,21 @@ namespace ViewModel
         private void ToggleGoldQuestSelection()
         {
             GoldQuestInfoViewModel.ToggleSelection();
-            UpdateQuestsCollection(GoldQuestInfoViewModel.IsSelected, GoldQuestInfoViewModel.QuestViewModel);
+            UpdateQuestsCollection();
         }
 
         [RelayCommand]
         private void ToggleSilverQuestSelection()
         {
             SilverQuestInfoViewModel.ToggleSelection();
-            UpdateQuestsCollection(SilverQuestInfoViewModel.IsSelected, SilverQuestInfoViewModel.QuestViewModel);
+            UpdateQuestsCollection();
         }
 
         [RelayCommand]
         private void ToggleBronzeQuestSelection()
         {
             BronzeQuestInfoViewModel.ToggleSelection();
-            UpdateQuestsCollection(BronzeQuestInfoViewModel.IsSelected, BronzeQuestInfoViewModel.QuestViewModel);
+            UpdateQuestsCollection();
         }
 
         /// <summary>
@@ -64,21 +64,17 @@ namespace ViewModel
             SilverQuestInfoViewModel = new QuestInfoViewModel(silverQuest);
             BronzeQuestInfoViewModel = new QuestInfoViewModel(bronzeQuest);
 
-            QuestsCollection = new ObservableCollection<QuestViewModel>();
+            QuestsCollection = new ObservableCollection<QuestViewModel>
+            {
+                GoldQuestInfoViewModel.QuestViewModel,
+                SilverQuestInfoViewModel.QuestViewModel,
+                BronzeQuestInfoViewModel.QuestViewModel
+            };
         }
         
-        private void UpdateQuestsCollection(bool isSelected, QuestViewModel questViewModel)
+        private void UpdateQuestsCollection()
         {
             var newAllQuests = new ObservableCollection<QuestViewModel>(QuestsCollection);
-            if (isSelected)
-            {
-                newAllQuests.Add(questViewModel);
-            }
-            else
-            {
-                newAllQuests.Remove(questViewModel);
-            }
-            
             QuestsCollection = newAllQuests;
         }
     }

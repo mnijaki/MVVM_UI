@@ -18,6 +18,8 @@ namespace Binders
 
             if (m_descriptionLabel)
                 m_descriptionLabel.text = questViewModel.Description;
+            
+            gameObject.SetActive(questViewModel.IsVisible);
         }
     }
 }

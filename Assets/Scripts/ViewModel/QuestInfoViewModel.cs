@@ -20,12 +20,13 @@ namespace ViewModel
             if (quest == null)
                 throw new ArgumentNullException(nameof(quest));
 
-            QuestViewModel = new QuestViewModel(quest);
+            QuestViewModel = new QuestViewModel(quest, false);
         }
         
         public void ToggleSelection()
         {
             IsSelected = !IsSelected;
+            QuestViewModel.ToggleVisibility(IsSelected);
         }
     }
 }
