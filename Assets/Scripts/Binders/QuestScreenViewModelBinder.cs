@@ -9,26 +9,18 @@ namespace Binders
     {
         [SerializeField]
         private Binder m_goldQuestInfoBinder;
-
         [SerializeField]
         private Binder m_silverQuestInfoBinder;
-
         [SerializeField]
         private Binder m_bronzeQuestInfoBinder;
         
-        // MN:Check
         [SerializeField]
         private View.BinderContainerView m_questListView;
         
-        // MN:Check
         [SerializeField]
         private Button m_goldButton;
-        
-        // MN:Check
         [SerializeField]
         private Button m_silverButton;
-        
-        // MN:Check
         [SerializeField]
         private Button m_bronzeButton;
 
@@ -38,7 +30,13 @@ namespace Binders
             if (questsScreenViewModel == null) 
                 return;
 
-            // MN: Bind individual quest binders.
+            BindQuestInfos(questsScreenViewModel);
+            BindQuestsList(questsScreenViewModel);
+            BindUIEvents(questsScreenViewModel);
+        }
+
+        private void BindQuestInfos(QuestsScreenViewModel questsScreenViewModel)
+        {
             if (m_goldQuestInfoBinder)
                 m_goldQuestInfoBinder.Bindable = questsScreenViewModel.GoldQuestInfoViewModel;
 
@@ -47,12 +45,16 @@ namespace Binders
 
             if (m_bronzeQuestInfoBinder)
                 m_bronzeQuestInfoBinder.Bindable = questsScreenViewModel.BronzeQuestInfoViewModel;
-            
-            // MN: Bind the dynamic quest list.
+        }
+
+        private void BindQuestsList(QuestsScreenViewModel questsScreenViewModel)
+        {
             if (m_questListView)
-                m_questListView.Bindables = questsScreenViewModel.AllQuests;
-            
-            // MN: Bind button click events.
+                m_questListView.Bindables = questsScreenViewModel.QuestsCollection;
+        }
+
+        private void BindUIEvents(QuestsScreenViewModel questsScreenViewModel)
+        {
             if (m_goldButton)
             {
                 m_goldButton.onClick.RemoveAllListeners();
