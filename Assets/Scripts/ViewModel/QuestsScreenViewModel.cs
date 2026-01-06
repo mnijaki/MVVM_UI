@@ -17,17 +17,17 @@ namespace ViewModel
         /// <summary>
         /// Gets the view model for the gold quest.
         /// </summary>
-        public QuestViewModel GoldQuest { get; }
+        public QuestInfoViewModel GoldQuestInfoViewModel { get; }
 
         /// <summary>
         /// Gets the view model for the silver quest.
         /// </summary>
-        public QuestViewModel SilverQuest { get; }
+        public QuestInfoViewModel SilverQuestInfoViewModel { get; }
 
         /// <summary>
         /// Gets the view model for the bronze quest.
         /// </summary>
-        public QuestViewModel BronzeQuest { get; }
+        public QuestInfoViewModel BronzeQuestInfoViewModel { get; }
         
         // MN:Check
         // MN: MVVM Community Toolkit will automatically generate public property 'AllQuests'
@@ -38,19 +38,64 @@ namespace ViewModel
         // MN:Will automatically generate command property, e.g. SelectGoldQuestCommand.
         // MN:These command property will be created during object initialization.
         [RelayCommand]
-        private void SelectGoldQuest() => GoldQuest.AnimateBump();
-        
+        private void ToggleGoldQuestSelection()
+        {
+            GoldQuestInfoViewModel.ToggleSelection();
+            
+            var newAllQuests = new ObservableCollection<QuestViewModel>(AllQuests);
+            if (GoldQuestInfoViewModel.IsSelected)
+            {
+                newAllQuests.Add(GoldQuestInfoViewModel.QuestViewModel);
+            }
+            else
+            {
+                newAllQuests.Remove(GoldQuestInfoViewModel.QuestViewModel);
+            }
+            
+            AllQuests = newAllQuests;
+        }
+
         // MN:Check
         // MN:Will automatically generate command property, e.g. SelectGoldQuestCommand.
         // MN:These command property will be created during object initialization.
         [RelayCommand]
-        private void SelectSilverQuest() => SilverQuest.AnimateBump();
-        
+        private void ToggleSilverQuestSelection()
+        {
+            SilverQuestInfoViewModel.ToggleSelection();
+            
+            var newAllQuests = new ObservableCollection<QuestViewModel>(AllQuests);
+            if (SilverQuestInfoViewModel.IsSelected)
+            {
+                newAllQuests.Add(SilverQuestInfoViewModel.QuestViewModel);
+            }
+            else
+            {
+                newAllQuests.Remove(SilverQuestInfoViewModel.QuestViewModel);
+            }
+            
+            AllQuests = newAllQuests;
+        }
+
         // MN:Check
         // MN:Will automatically generate command property, e.g. SelectGoldQuestCommand.
         // MN:These command property will be created during object initialization.
         [RelayCommand]
-        private void SelectBronzeQuest() => BronzeQuest.AnimateBump();
+        private void ToggleBronzeQuestSelection()
+        {
+            BronzeQuestInfoViewModel.ToggleSelection();
+            
+            var newAllQuests = new ObservableCollection<QuestViewModel>(AllQuests);
+            if (BronzeQuestInfoViewModel.IsSelected)
+            {
+                newAllQuests.Add(BronzeQuestInfoViewModel.QuestViewModel);
+            }
+            else
+            {
+                newAllQuests.Remove(BronzeQuestInfoViewModel.QuestViewModel);
+            }
+            
+            AllQuests = newAllQuests;
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="QuestsScreenViewModel"/> class.
@@ -72,12 +117,11 @@ namespace ViewModel
             if (bronzeQuest == null)
                 throw new ArgumentNullException(nameof(bronzeQuest));
 
-            GoldQuest = new QuestViewModel(goldQuest);
-            SilverQuest = new QuestViewModel(silverQuest);
-            BronzeQuest = new QuestViewModel(bronzeQuest);
-            
-            // MN:Check
-            AllQuests = new ObservableCollection<QuestViewModel> {GoldQuest, SilverQuest, BronzeQuest};
+            GoldQuestInfoViewModel = new QuestInfoViewModel(goldQuest);
+            SilverQuestInfoViewModel = new QuestInfoViewModel(silverQuest);
+            BronzeQuestInfoViewModel = new QuestInfoViewModel(bronzeQuest);
+
+            AllQuests = new ObservableCollection<QuestViewModel>();
         }
     }
 }

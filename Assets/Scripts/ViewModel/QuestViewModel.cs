@@ -8,16 +8,12 @@ namespace ViewModel
     /// <summary>
     /// View model for a quest.
     /// </summary>
-    public sealed partial class QuestViewModel : ObservableObject, IBindable
+    public sealed class QuestViewModel : ObservableObject, IBindable
     {
         /// <summary>
         /// Gets the description of the quest.
         /// </summary>
         public string Description { get; }
-
-        // MN: Flag responsible for triggering animation.
-        [ObservableProperty]
-        private bool m_shouldAnimateBump;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="QuestViewModel"/> class.
@@ -31,8 +27,5 @@ namespace ViewModel
 
             Description = quest.Description;
         }
-        
-        // MN: Reset animation flag after delay (will be handled in the binder) ?
-        public void AnimateBump() => ShouldAnimateBump = true;
     }
 }

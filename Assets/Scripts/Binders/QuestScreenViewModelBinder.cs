@@ -8,13 +8,13 @@ namespace Binders
     internal sealed class QuestScreenViewModelBinder : Binder
     {
         [SerializeField]
-        private Binder m_goldQuestBinder;
+        private Binder m_goldQuestInfoBinder;
 
         [SerializeField]
-        private Binder m_silverQuestBinder;
+        private Binder m_silverQuestInfoBinder;
 
         [SerializeField]
-        private Binder m_bronzeQuestBinder;
+        private Binder m_bronzeQuestInfoBinder;
         
         // MN:Check
         [SerializeField]
@@ -35,19 +35,18 @@ namespace Binders
         protected override void RefreshBindings()
         {
             var questsScreenViewModel = Bindable as QuestsScreenViewModel;
-            // MN:early return. No need to check ? everywhere.
             if (questsScreenViewModel == null) 
                 return;
 
             // MN: Bind individual quest binders.
-            if (m_goldQuestBinder)
-                m_goldQuestBinder.Bindable = questsScreenViewModel.GoldQuest;
+            if (m_goldQuestInfoBinder)
+                m_goldQuestInfoBinder.Bindable = questsScreenViewModel.GoldQuestInfoViewModel;
 
-            if (m_silverQuestBinder)
-                m_silverQuestBinder.Bindable = questsScreenViewModel.SilverQuest;
+            if (m_silverQuestInfoBinder)
+                m_silverQuestInfoBinder.Bindable = questsScreenViewModel.SilverQuestInfoViewModel;
 
-            if (m_bronzeQuestBinder)
-                m_bronzeQuestBinder.Bindable = questsScreenViewModel.BronzeQuest;
+            if (m_bronzeQuestInfoBinder)
+                m_bronzeQuestInfoBinder.Bindable = questsScreenViewModel.BronzeQuestInfoViewModel;
             
             // MN: Bind the dynamic quest list.
             if (m_questListView)
@@ -57,19 +56,19 @@ namespace Binders
             if (m_goldButton)
             {
                 m_goldButton.onClick.RemoveAllListeners();
-                m_goldButton.onClick.AddListener(() => questsScreenViewModel.SelectGoldQuestCommand.Execute(null));
+                m_goldButton.onClick.AddListener(() => questsScreenViewModel.ToggleGoldQuestSelectionCommand.Execute(null));
             }
             
             if (m_silverButton)
             {
                 m_silverButton.onClick.RemoveAllListeners();
-                m_silverButton.onClick.AddListener(() => questsScreenViewModel.SelectSilverQuestCommand.Execute(null));
+                m_silverButton.onClick.AddListener(() => questsScreenViewModel.ToggleSilverQuestSelectionCommand.Execute(null));
             }
             
             if (m_bronzeButton)
             {
                 m_bronzeButton.onClick.RemoveAllListeners();
-                m_bronzeButton.onClick.AddListener(() => questsScreenViewModel.SelectBronzeQuestCommand.Execute(null));
+                m_bronzeButton.onClick.AddListener(() => questsScreenViewModel.ToggleBronzeQuestSelectionCommand.Execute(null));
             }
         }
     }
